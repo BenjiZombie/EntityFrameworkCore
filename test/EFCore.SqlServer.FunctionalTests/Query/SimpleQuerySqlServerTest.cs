@@ -203,8 +203,8 @@ FROM (
 LEFT JOIN (
     SELECT [c].[EmployeeID], [c].[City], [c].[Country], [c].[FirstName], [c].[ReportsTo], [c].[Title]
     FROM [Employees] AS [c]
-    WHERE [c].[EmployeeID] = 4294967295
-) AS [t] ON 1 = 1");
+    WHERE [c].[EmployeeID] = " + NonExistentID +
+") AS [t] ON 1 = 1");
         }
 
         public override void Default_if_empty_top_level_positive()
@@ -230,7 +230,7 @@ LEFT JOIN (
             AssertSql(
                 @"SELECT [c].[EmployeeID], [c].[City], [c].[Country], [c].[FirstName], [c].[ReportsTo], [c].[Title]
 FROM [Employees] AS [c]
-WHERE [c].[EmployeeID] = 4294967295");
+WHERE [c].[EmployeeID] = " + NonExistentID);
         }
 
         public override void Default_if_empty_top_level_projection()
@@ -245,8 +245,8 @@ FROM (
 LEFT JOIN (
     SELECT [e].[EmployeeID]
     FROM [Employees] AS [e]
-    WHERE [e].[EmployeeID] = 4294967295
-) AS [t] ON 1 = 1");
+    WHERE [e].[EmployeeID] = " + NonExistentID +
+") AS [t] ON 1 = 1");
         }
 
         public override void Where_query_composition()
